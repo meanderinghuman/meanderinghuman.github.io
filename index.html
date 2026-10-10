@@ -118,8 +118,8 @@
     .row { grid-template-columns: 1fr; gap: 0; }
     .skill { grid-template-columns: 1fr; gap: 0; }
   }
-  /* Section bar: sticky at the top on every device, swipeable on narrow screens */
-  @media all {
+  /* Below desktop width: sticky, swipeable section bar (desktop keeps the side menu) */
+  @media (max-width: 1139px) {
     .toc {
       position: sticky; top: 3px; z-index: 15; display: flex; gap: 18px;
       overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
@@ -135,6 +135,17 @@
     h2[id] { scroll-margin-top: 64px !important; }
     body #theme { top: 54px; }
     main { padding-top: 36px; }
+  }
+  @media (min-width: 1140px) {
+    .toc {
+      display: flex; flex-direction: column; gap: 6px; position: fixed; top: 120px;
+      left: calc(50% - 380px - 180px); width: 140px;
+      font: 0.8rem Inter, system-ui, sans-serif;
+    }
+    .toc a { color: var(--muted); padding-left: 10px; border-left: 2px solid transparent; transition: color .15s, border-color .15s; }
+    .toc a, .toc a:hover { text-decoration: none; }
+    .toc a:hover { color: var(--fg); }
+    .toc a.active { color: var(--fg); border-left-color: var(--link); }
   }
   h2[id] { scroll-margin-top: 24px; }
   html { scroll-behavior: smooth; }
@@ -200,9 +211,9 @@
     .job { padding: 0; margin: 0 0 12px; }
     .job:hover { background: none; }
   }
-  @media (min-width: 761px) {
-    /* Line the first link up with the left edge of the content column (760px wide, 16px gutter) */
-    .toc { justify-content: flex-start; gap: 24px; padding-left: max(16px, calc(50% - 380px + 16px)); padding-right: 64px; -webkit-mask-image: none; mask-image: none; }
+  @media (min-width: 761px) and (max-width: 1139px) {
+    /* Line the first link up with the left edge of the content column */
+    .toc { padding-left: max(16px, calc(50% - 380px + 16px)); padding-right: 64px; gap: 24px; -webkit-mask-image: none; mask-image: none; }
     .toc a:last-child { padding-right: 0; }
     body #theme { top: 6px; width: 32px; height: 32px; }
     main { padding-top: 48px; }
