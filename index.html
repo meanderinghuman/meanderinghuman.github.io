@@ -201,7 +201,8 @@
     .job:hover { background: none; }
   }
   @media (min-width: 761px) {
-    .toc { justify-content: center; gap: 26px; -webkit-mask-image: none; mask-image: none; }
+    /* Line the first link up with the left edge of the content column (760px wide, 16px gutter) */
+    .toc { justify-content: flex-start; gap: 24px; padding-left: max(16px, calc(50% - 380px + 16px)); padding-right: 64px; -webkit-mask-image: none; mask-image: none; }
     .toc a:last-child { padding-right: 0; }
     body #theme { top: 6px; width: 32px; height: 32px; }
     main { padding-top: 48px; }
