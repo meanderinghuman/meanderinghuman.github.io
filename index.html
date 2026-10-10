@@ -118,7 +118,24 @@
     .row { grid-template-columns: 1fr; gap: 0; }
     .skill { grid-template-columns: 1fr; gap: 0; }
   }
-  .toc { display: none; }
+  /* Phones and small screens: sticky, swipeable section bar */
+  @media (max-width: 1139px) {
+    .toc {
+      position: sticky; top: 3px; z-index: 15; display: flex; gap: 18px;
+      overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+      padding: 10px 16px; background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: saturate(1.4) blur(8px); -webkit-backdrop-filter: saturate(1.4) blur(8px);
+      border-bottom: 1px solid var(--line); font: 0.8rem Inter, system-ui, sans-serif;
+    }
+    .toc::-webkit-scrollbar { display: none; }
+    .toc { -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
+    .toc a:last-child { padding-right: 40px; }
+    .toc a { color: var(--muted); white-space: nowrap; text-decoration: none; padding-bottom: 2px; border-bottom: 2px solid transparent; }
+    .toc a.active { color: var(--fg); border-bottom-color: var(--link); }
+    h2[id] { scroll-margin-top: 64px !important; }
+    body #theme { top: 54px; }
+    main { padding-top: 36px; }
+  }
   @media (min-width: 1140px) {
     .toc {
       display: flex; flex-direction: column; gap: 6px; position: fixed; top: 120px;
@@ -456,7 +473,17 @@
   const links = [...document.querySelectorAll('.toc a')];
   const sections = links.map(a => document.getElementById(a.hash.slice(1)));
   let pinned = null; // section chosen by a click; kept until the visitor scrolls themselves
-  const setActive = i => links.forEach((a, j) => a.classList.toggle('active', j === i));
+  const toc = document.querySelector('.toc');
+  let lastActive = -1;
+  const setActive = i => {
+    links.forEach((a, j) => a.classList.toggle('active', j === i));
+    // On the phone bar, keep the active section visible without moving the page
+    if (i !== lastActive && toc.scrollWidth > toc.clientWidth) {
+      const a = links[i];
+      toc.scrollTo({ left: a.offsetLeft - toc.clientWidth / 2 + a.offsetWidth / 2, behavior: lastActive < 0 ? 'auto' : 'smooth' });
+    }
+    lastActive = i;
+  };
   const update = () => {
     if (pinned !== null) return setActive(pinned);
     const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
