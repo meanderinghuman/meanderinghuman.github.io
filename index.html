@@ -326,11 +326,11 @@
 
   <h2 id="projects">Projects<a class="anchor" href="#projects" aria-label="Link to this section">#</a></h2>
   <div class="job">
-    <div class="row head"><span class="org">UltronAI <span class="tag">Siemens Aavishkar '25 winner</span></span><span class="r"><a href="https://github.com/Amitanand983/UltronAI">GitHub ↗</a></span></div>
-    <div class="stack">Python · LangChain · LLMs</div>
+    <div class="row head"><span class="org">DDP Scaling Anatomy</span><span class="r"><a href="https://github.com/meanderinghuman/ddp-scaling-anatomy">GitHub ↗</a></span></div>
+    <div class="stack">PyTorch DDP · NCCL · CUDA · Slurm · PyTorch Profiler</div>
     <ul>
-      <li>Developed a <b>Multi-Agent Orchestrator</b> managing specialized AI agents for research, planning, and reasoning.</li>
-      <li>Orchestrated <b>5+ specialized agents</b> with recursive feedback loops exploring AGI pathways; integrated LLMs with LangChain for autonomous decision-making.</li>
+      <li>Benchmarked <b>PyTorch DistributedDataParallel</b> strong scaling on <b>4× V100</b> GPUs (Slurm + torchrun): ResNet18/CIFAR-100 reached a <b>1.63× speedup</b>, while a U-Net SciML surrogate got <b>slower (0.95×)</b>; diagnosed the gap with PyTorch Profiler and NCCL kernel traces as a communication-to-compute imbalance.</li>
+      <li>Cut gradient all-reduces per update from <b>12 to 3</b> with <b>DDP.no_sync()</b> gradient accumulation (<b>+9.7% throughput</b>, <b>−36% NCCL time</b>), and showed SyncBatchNorm costs <b>46% throughput</b> with no accuracy gain; all results are the mean of 3 runs.</li>
     </ul>
   </div>
   <div class="job">
