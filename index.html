@@ -326,6 +326,14 @@
 
   <h2 id="projects">Projects<a class="anchor" href="#projects" aria-label="Link to this section">#</a></h2>
   <div class="job">
+    <div class="row head"><span class="org">StoreOps Copilot</span><span class="r"><a href="https://huggingface.co/sidpnyc/storeops-copilot-qwen2.5-3b">Model ↗</a> · <a href="https://github.com/meanderinghuman/storeops-copilot">GitHub ↗</a></span></div>
+    <div class="stack">Qwen2.5-3B · QLoRA (Unsloth) · llama.cpp (Metal) · FastAPI · Docker · Prometheus + Grafana</div>
+    <ul>
+      <li>Fine-tuned <b>Qwen2.5-3B</b> with <b>QLoRA</b> on 2,645 execution-verified tool-calling conversations built from Walmart M5 sales data, lifting task success from <b>38% to 90%</b> on 500 held-out scenarios; the agent runs <b>locally on a MacBook</b> via llama.cpp + Metal.</li>
+      <li>Built a <b>FastAPI safety gateway</b> that validates every tool call and grounds every number in tool results, escalating only the hardest 6% to a large model: <b>95.4% task success</b>, <b>94% answered locally</b>, <b>0.4% harmful actions</b> and <b>94% lower API cost</b>, monitored with Prometheus + Grafana.</li>
+    </ul>
+  </div>
+  <div class="job">
     <div class="row head"><span class="org">DDP Scaling Anatomy</span><span class="r"><a href="https://github.com/meanderinghuman/ddp-scaling-anatomy">GitHub ↗</a></span></div>
     <div class="stack">PyTorch DDP · NCCL · CUDA · Slurm · PyTorch Profiler</div>
     <ul>
